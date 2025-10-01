@@ -19,7 +19,7 @@ export const registerUser = async (req: Request, res: Response) => {
             _id: user._id,
             name: user.name,
             email: user.email,
-            token: generateToken(user._id.toString()),
+            token: generateToken(user._id!.toString()),
         });
     } catch (error) {
         res.status(500).json({ message: "Server error" });
@@ -36,7 +36,7 @@ export const loginUser = async (req: Request, res: Response) => {
                 _id: user._id,
                 name: user.name,
                 email: user.email,
-                token: generateToken(user._id.toString()),
+                token: generateToken(user._id!.toString()),
             });
         } else {
             res.status(401).json({ message: "Invalid credentials" });
