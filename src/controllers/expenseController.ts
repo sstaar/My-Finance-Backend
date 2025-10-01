@@ -8,7 +8,7 @@ export const addExpense = async (req: Request, res: Response) => {
         const expense = await Expense.create({
             user: req.user.id,
             title,
-            category,
+            category, // must be a Category ID
             amount,
             description,
         });
@@ -21,7 +21,10 @@ export const addExpense = async (req: Request, res: Response) => {
 
 export const getExpenses = async (req: Request, res: Response) => {
     try {
-        const expenses = await Expense.find({ user: req.user.id }).sort({ createdAt: -1 });
+        const expenses = await Expense.find({ user: req.user.id })
+            .populate("category", "name") // populate category name
+            .sort({ createdAt: -1 });
+
         res.json(expenses);
     } catch (error) {
         res.status(500).json({ message: "Server error" });

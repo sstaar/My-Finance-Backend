@@ -3,6 +3,7 @@ import dotenv from "dotenv";
 import connectDB from "./config/db";
 import authRoutes from "./routes/authRoutes";
 import expenseRoutes from "./routes/expenseRoutes";
+import categoryRoutes from "./routes/categoryRoutes";
 
 dotenv.config();
 connectDB();
@@ -13,6 +14,7 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/expenses", expenseRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.get("/", (req: Request, res: Response) => {
     res.send("Finance API is running...");
