@@ -20,5 +20,6 @@ app.get("/", (req: Request, res: Response) => {
     res.send("Finance API is running...");
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const PORT: number = parseInt(process.env.PORT || "5000", 10);
+const HOST = process.env.HOST || "0.0.0.0";
+app.listen(PORT, HOST, () => console.log(`Server running on port ${PORT}`));
